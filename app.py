@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         pdf_link = request.form.get('content')
-        converted_text = None
+        converted_text, msg = None, None
         
         if pdf_link:
             convert_to = request.form.get('convert_to')
@@ -19,10 +19,11 @@ def index():
                 converted_text = pdf2html_pdfminer(pdf_link)
             elif convert_to == '3':
                 converted_text = pdf2text_pdfplumber(pdf_link)
-            else:
-                converted_text = 'Oops something went wrong! please try again'
 
-            return render_template('index.html', converted_text=converted_text)
+        if not converted_text:
+            msg = "Are you sure it's a pdf link?"
+
+        return render_template('index.html', converted_text=converted_text, msg=msg)
 
     return render_template('index.html')
  

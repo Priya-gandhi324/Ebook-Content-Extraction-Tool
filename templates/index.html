@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Task Manager</title>
+<title>Ebook Content Extractor</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">Ebook PDF Content Extraction Tool</h1>
+    <h1 style="text-align: center">Ebook Content Extraction Tool</h1>
 
     <div class="form">
         <form action="/" method="POST">
@@ -24,6 +24,12 @@
 
     {% if converted_text %}
         <p> {{ converted_text }} </p>
+    {% endif %}
+
+    {% if msg %}
+    <div class="alert">
+        {{ msg }}
+    </div>
     {% endif %}
 
 {% endblock %}
